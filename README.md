@@ -1,6 +1,6 @@
 # eventra_app
 
-A new Flutter project.
+A Event finding application.
 
 ## Getting Started
 
