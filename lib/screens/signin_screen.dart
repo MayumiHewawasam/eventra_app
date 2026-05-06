@@ -24,14 +24,14 @@ class _SigninScreenState extends State<SigninScreen> {
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
-      // Login සාර්ථක වුණාම ඊළඟට යන්න ඕනේ Screen එක මෙතන දෙන්න
+      // Navigate to the next screen after successful login
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successful! Welcome to JAZZ')),
       );
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString()}')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
     } finally {
       setState(() {
         _isLoading = false;
@@ -52,18 +52,19 @@ class _SigninScreenState extends State<SigninScreen> {
               const SizedBox(height: 20),
               // Logo
               Center(
-                child: ShaderMask(
-                  shaderCallback: (bounds) => const LinearGradient(
-                    colors: [Colors.cyan, Colors.purple],
-                  ).createShader(bounds),
-                  child: const Text(
-                    'jazz',
-                    style: TextStyle(
-                      fontSize: 64,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white, // Gradient එක නිසා මේක white වෙන්න ඕනේ
-                      letterSpacing: 2,
-                    ),
+                child: Text(
+                  'jazz',
+                  style: TextStyle(
+                    fontSize: 64,
+                    fontWeight: FontWeight.w900,
+                    foreground: Paint()
+                      ..shader =
+                          const LinearGradient(
+                            colors: [Colors.cyan, Colors.purple],
+                          ).createShader(
+                            const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                          ),
+                    letterSpacing: 2,
                   ),
                 ),
               ),
@@ -82,10 +83,7 @@ class _SigninScreenState extends State<SigninScreen> {
               Center(
                 child: Text(
                   'Use Credentials to access your account',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
                 ),
               ),
               const SizedBox(height: 40),
@@ -106,7 +104,10 @@ class _SigninScreenState extends State<SigninScreen> {
                 decoration: InputDecoration(
                   hintText: 'name@example.com',
                   hintStyle: TextStyle(color: Colors.grey.shade400),
-                  prefixIcon: const Icon(Icons.email_outlined, color: Colors.grey),
+                  prefixIcon: const Icon(
+                    Icons.email_outlined,
+                    color: Colors.grey,
+                  ),
                   filled: true,
                   fillColor: Colors.grey.shade50,
                   border: OutlineInputBorder(
@@ -144,7 +145,10 @@ class _SigninScreenState extends State<SigninScreen> {
                 decoration: InputDecoration(
                   hintText: 'Enter your password',
                   hintStyle: TextStyle(color: Colors.grey.shade400),
-                  prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
+                  prefixIcon: const Icon(
+                    Icons.lock_outline,
+                    color: Colors.grey,
+                  ),
                   filled: true,
                   fillColor: Colors.grey.shade50,
                   border: OutlineInputBorder(
@@ -161,7 +165,10 @@ class _SigninScreenState extends State<SigninScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)], // Purple to Blue gradient
+                    colors: [
+                      Color(0xFF8E2DE2),
+                      Color(0xFF4A00E0),
+                    ], // Purple to Blue gradient
                   ),
                 ),
                 child: ElevatedButton(
@@ -195,7 +202,10 @@ class _SigninScreenState extends State<SigninScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
                       'Or continue with',
-                      style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
+                      style: TextStyle(
+                        color: Colors.grey.shade500,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                   Expanded(child: Divider(color: Colors.grey.shade300)),
@@ -209,8 +219,14 @@ class _SigninScreenState extends State<SigninScreen> {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () {},
-                      icon: const Icon(Icons.g_mobiledata, color: Colors.red, size: 28),
-                      label: const Text('Google', style: TextStyle(color: Colors.black87)),
+                      icon: Image.network(
+                        'https://img.icons8.com/color/48/000000/google-logo.png',
+                        height: 24,
+                      ),
+                      label: const Text(
+                        'Google',
+                        style: TextStyle(color: Colors.black87),
+                      ),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
@@ -224,8 +240,14 @@ class _SigninScreenState extends State<SigninScreen> {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () {},
-                      icon: const Icon(Icons.code, color: Colors.black, size: 20), // Placeholder for GitHub icon
-                      label: const Text('GitHub', style: TextStyle(color: Colors.black87)),
+                      icon: Image.network(
+                        'https://img.icons8.com/fluent/48/000000/github.png',
+                        height: 24,
+                      ),
+                      label: const Text(
+                        'GitHub',
+                        style: TextStyle(color: Colors.black87),
+                      ),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
