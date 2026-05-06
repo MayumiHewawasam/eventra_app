@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF8E2DE2)), // Purple theme
         useMaterial3: true,
-        fontFamily: 'Inter', // Default font එක විදියට තියාගන්න පුළුවන්
+        fontFamily: 'Inter', // Default font family
       ),
-      debugShowCheckedModeBanner: false, // Debug බැනර් එක අයින් කරන්න
-      home: const SigninScreen(), // පළවෙනි page එක විදියට Sign In පෙන්වන්න
+      debugShowCheckedModeBanner: false, // Remove debug banner
+      home: const SigninScreen(), // Show Sign In screen initially
     );
   }
 }
